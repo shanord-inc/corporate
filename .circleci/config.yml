@@ -26,13 +26,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn test
       - run:
-        command: yarn run build
-        environment:
-          WP_API_ENDPOINT: $WP_API_ENDPOINT
-          ACF_API_ENDPOINT: $ACF_API_ENDPOINT
-          CONTACT_ENDPOINT: $CONTACT_ENDPOINT
-          SOURCE: $SOURCE
-          DEST: $DEST
-          USER_NAME: $USER_NAME
-          PORT: $PORT
+          command: yarn run build
+          environment:
+            WP_API_ENDPOINT: $WP_API_ENDPOINT
+            ACF_API_ENDPOINT: $ACF_API_ENDPOINT
+            CONTACT_ENDPOINT: $CONTACT_ENDPOINT
+            SOURCE: $SOURCE
+            DEST: $DEST
+            USER_NAME: $USER_NAME
+            PORT: $PORT
       - run: yarn run deploy
