@@ -1,0 +1,99 @@
+import * as React from 'react'
+import media from '../../../styles/mixins/media'
+import transition from '../../../styles/mixins/transition'
+import styled, {withProps} from '../../../styles/themed-components'
+import {colors} from '../../../styles/variables/colors'
+import BaseTextarea from '../../atoms/Textarea'
+
+
+const View = styled.div`
+  display: block;
+  margin-top: 10px;
+  
+  ${media.tablet`
+    margin-top: 30px;
+  `}
+`
+type InputOuterType = {
+  hasError: boolean
+}
+const InputOuter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  ${media.tablet`
+    align-items: center;
+    flex-direction: row;
+  `}
+`
+const Textarea = withProps<any, HTMLDivElement>(styled(BaseTextarea))`
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid #999;
+  font-size: 16px;
+  
+  ${media.tablet`
+    width: 1%;
+    flex: 1 1 auto;
+  `}
+  
+  ${transition({duration: 0.4, property: 'border-color'})}
+  
+  ${(props: InputOuterType) => props.hasError ? `
+    border-color: ${colors.error};
+  ` : ``}
+`
+const Label = styled.label`
+  min-width: 5em;
+  margin: 0 10px 0 0;
+  font-size: 16px;
+`
+const Error = styled.label`
+  text-align: right;
+  display: block;
+  min-width: 5em;
+  min-height: 1.8em;
+  margin: 0 10px;
+  font-size: 16px;
+  color: ${colors.error};
+`
+
+export type Props = {
+  name?: string
+  onChange: (val: any) => void // 型
+  onFocus: (val: any) => void
+  onBlur: (val: any) => void
+  value?: string
+  rows?: number
+  meta: {
+    error: string,
+    invalid: boolean,
+    touched: boolean,
+    valid: boolean,
+    warning: any
+  },
+  label: string,
+};
+
+export default function TextareaField({
+  meta,
+  label,
+  ...props
+}: Props) {
+  const hasError = meta.touched && meta.error
+  return (
+    <View>
+      <InputOuter>
+        <Label>{label}</Label>
+        <Textarea hasError={hasError} {...props} />
+      </InputOuter>
+      <Error>
+        {hasError &&
+        <span>{meta.error}</span>
+        }
+      </Error>
+    </View>
+  )
+}
+

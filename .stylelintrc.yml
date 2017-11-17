@@ -1,0 +1,10 @@
+processors: [stylelint-processor-styled-components]
+extends: stylelint-config-standard
+syntax: scss
+rules:
+  # TODO: 暫定対応
+  declaration-block-semicolon-newline-after: null
+  declaration-empty-line-before: null
+  block-no-empty: null
+  rule-empty-line-before: null
+
