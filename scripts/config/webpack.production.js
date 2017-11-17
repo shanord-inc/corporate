@@ -29,7 +29,7 @@ module.exports =
         }),
         new Dotenv({
           path: './.env.production',
-          safe: false,
+          safe: true,
         }),
         // Decrease script evaluation time
         // https://github.com/webpack/webpack/blob/master/examples/scope-hoisting/README.md

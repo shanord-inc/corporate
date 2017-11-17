@@ -1,6 +1,8 @@
 const Rsync = require('rsync')
 const logger = require('./lib/logger')
-require('dotenv').config()
+require('dotenv').config({
+  path: './.env.production',
+})
 
 const {env} = process
 const runDeploy = () =>
