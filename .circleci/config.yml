@@ -36,7 +36,7 @@ jobs:
           command: |
             sudo apt install rsync
       - run:
-          name: deploy hugo
+          name: deploy sakura vps
           command: yarn run deploy
 
 workflows:
