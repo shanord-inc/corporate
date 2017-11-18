@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default
 const styledComponentsTransformer = createStyledComponentsTransformer()
 const staticAssetName = 'static/media/[hash:8].[ext]'
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 module.exports = {
   resolve: {
@@ -19,9 +20,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              getCustomTransformers: () => (
-                {before: [styledComponentsTransformer]}
-              )
+              transpileOnly: true,
             }
           }
         ],
@@ -56,6 +55,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: paths.appHtml,
       inject: true,

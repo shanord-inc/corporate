@@ -29,7 +29,7 @@ module.exports =
         }),
         new Dotenv({
           path: './.env.production',
-          safe: false,
+          safe: true,
           systemvars: true,
         }),
         // Decrease script evaluation time

@@ -11,7 +11,7 @@ module.exports =
     common,
     {
       cache: true,
-      devtool: 'cheap-module-inline-source-map',
+      devtool: 'heap-module-eval-source-map',
       entry: {
         app: [
           'react-error-overlay',
