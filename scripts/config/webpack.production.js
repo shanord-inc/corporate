@@ -11,6 +11,7 @@ module.exports =
   merge(
     common,
     {
+      devtool: 'source-map',
       entry: {
         app: [
           paths.appIndexJs
@@ -88,7 +89,6 @@ module.exports =
           minRatio: 0.8
         })
       ],
-      devtool: 'cheap-module-source-map',
     }
   )
 
