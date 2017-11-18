@@ -34,7 +34,7 @@ jobs:
     <<: *defaults
     steps:
      - attach_workspace:
-              at: ~/repo
+          at: ~/repo
       - run:
           name: deploy hugo
           command: yarn run deploy
