@@ -1,13 +1,11 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+defaults: &defaults
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:7.10
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/node:7.10
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - run:
           name: Install dependencies
@@ -27,12 +25,16 @@ jobs:
       - run: yarn test
       - run:
           command: yarn run build
+      - persist_to_workspace:
+                root: ~/repo
+                paths:
+                  - ./*
 
   deploy:
-    docker:
-      - image: circleci/node:7.10
-    working_directory: ~/repo
+    <<: *defaults
     steps:
+     - attach_workspace:
+              at: ~/repo
       - run:
           name: deploy hugo
           command: yarn run deploy
