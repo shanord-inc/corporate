@@ -7,11 +7,6 @@ jobs:
   build:
     <<: *defaults
     steps:
-      - run:
-          name: Install dependencies
-          working_directory: /
-          command: |
-            sudo apt install rsync
       - checkout
       - restore_cache:
           keys:
@@ -35,6 +30,11 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
+      - run:
+          name: Install dependencies
+          working_directory: /
+          command: |
+            sudo apt install rsync
       - run:
           name: deploy hugo
           command: yarn run deploy
