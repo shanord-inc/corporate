@@ -2,12 +2,13 @@ import * as React from 'react'
 import {NavLink} from 'react-router-dom'
 import {compose} from 'recompose'
 import styled from 'styled-components'
+import github from '../../../images/GitHub-Mark-64px.png'
 import media from '../../../styles/mixins/media'
 import transition from '../../../styles/mixins/transition'
 import {withProps} from '../../../styles/themed-components'
-import connectMenu from './connectMenu'
 import {OpeningContextTypes} from '../Opening/OpeningProvider'
 import withOpening from '../Opening/withOpening'
+import connectMenu from './connectMenu'
 import {MenuContextTypes} from './MenuProvider'
 
 type StyleProps = {
@@ -78,6 +79,33 @@ const NavItem = styled(NavLink)`
   }
 `
 
+const Links = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: 40px;
+  text-align: center;
+  
+  ${media.tablet`
+    position: relative;
+    display: block;
+    margin: 0 25px 0;
+    bottom: auto;
+  `}
+`
+const Link = styled.a`
+  display: inline-block;
+  max-width: 30px;
+  
+  ${media.tablet`
+    max-width: 26px;
+  `}
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+`
+
 class Menu extends React.Component<OpeningContextTypes & MenuContextTypes> {
 
   render() {
@@ -90,6 +118,11 @@ class Menu extends React.Component<OpeningContextTypes & MenuContextTypes> {
         <NavItem onClick={() => props.menu.hide()} to="/works">WORKS</NavItem>
         <NavItem onClick={() => props.menu.hide()} to="/news">NEWS</NavItem>
         <NavItem onClick={() => props.menu.hide()} to="/contact">CONTACT</NavItem>
+        <Links>
+          <Link href="https://github.com/shanord-inc" target="_blank">
+            <img src={github}/>
+          </Link>
+        </Links>
       </View>
     )
   }
