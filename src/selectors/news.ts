@@ -1,8 +1,7 @@
-import {format} from 'date-fns'
+import format from 'date-fns/esm/format'
 import {createSelector} from 'reselect'
 import {PostType} from '../domain/models/Post'
 import * as entitiesSelectors from '../infra/redux/api/entities/selectors'
-import * as apiSelectors from '../infra/redux/api/selectors'
 import PostRepository from '../infra/repository/PostRepository'
 
 //FIXME: newsとpostを統一
@@ -28,7 +27,7 @@ export const hasNext = createSelector(
 
 export const getNewsById = (newsId: string) =>
   createSelector(
-    apiSelectors.getPostDetailById(newsId),
+    entitiesSelectors.getPostById(newsId),
     (post: PostType) => {
       const {content = '', date = '', id = '', title = ''} = post || {}
       return {
@@ -39,8 +38,3 @@ export const getNewsById = (newsId: string) =>
       }
     }
   )
-// createSelector(getNews, news => {
-//   const _news = news.filter((news: any) => news.id.toString() === newsId)
-//   // FIXME: モデルインスタンス化?
-//   return _news.length > 0 ? _news[0] : {}
-// })

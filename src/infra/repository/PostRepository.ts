@@ -6,7 +6,7 @@ import * as api from '../../infra/api'
 import AppState from '../../services/AppState'
 import {actions} from '../redux/api/entities/posts'
 import * as entitiesSelectors from '../redux/api/entities/selectors'
-import {actions as detailActions} from '../redux/api/postDetail/index'
+import {actions as detailActions} from '../redux/api/postDetail'
 import {PostSchema} from '../redux/api/schemata'
 import ReduxProvider from '../redux/ReduxProvider'
 
@@ -40,7 +40,8 @@ export default class PostRepository implements IPostRepository {
       return new Post(post)
     } else {
       const res = await api.post.getPostById(id)
-      this.redux.dispatch(detailActions.fetchPostDetail(res.data))
+      const {entities: {posts}, result} = normalize(res.data, PostSchema)
+      this.redux.dispatch(actions.getPosts(posts, []))
       return new Post(res.data)
     }
   }
