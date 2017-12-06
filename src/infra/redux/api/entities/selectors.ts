@@ -18,18 +18,17 @@ export const getAll = (entities: EntitiesState, entity: Entity, ids: string[]) =
   return ret[key]
 }
 
-export const getPostById = (id: string) => createSelector(
-  getPosts,
-  (posts: PostType[]): PostType | null => {
-    const ret = posts.filter(post => post.id == id)
-    return ret ? ret[0] : null
-  }
-)
+export const getById = (entities: EntitiesState, entity: Entity, id: string) => {
+  const key = entity.key
+  const ret = denormalize({[key]: id}, {[key]: entity}, entities)
+  const values = ret[key]
+  return typeof values === 'object' ? values : null
+}
 
-export const getPost = createSelector(
+export const getPostById = (id: string) => createSelector(
   getEntities,
-  (entities): PostType => {
-    return entities.post
+  (entities): PostType | null => {
+    return getById(entities, PostSchema, id)
   }
 )
 

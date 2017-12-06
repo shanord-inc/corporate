@@ -3,17 +3,7 @@
   "description": "shanord.com for Web",
   "version": "0.1.0",
   "author": "Shanord Inc.",
-  "ava": {
-    "files": [
-      "test/*.js"
-    ],
-    "verbose": true,
-    "require": [
-      "babel-core/register"
-    ]
-  },
   "dependencies": {
-    "@types/prop-types": "^15.5.2",
     "axios": "^0.16.2",
     "date-fns": "^2.0.0-alpha.7",
     "gsap": "^1.20.3",
@@ -48,12 +38,13 @@
     "@types/lodash.union": "^4.6.3",
     "@types/node": "^8.0.47",
     "@types/normalizr": "^2.0.18",
+    "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.24",
     "@types/react-addons-css-transition-group": "^15.0.3",
     "@types/react-dom": "^16.0.3",
     "@types/react-helmet": "^5.0.3",
     "@types/react-hot-loader": "^3.0.4",
-    "@types/react-redux": "^5.0.10",
+    "@types/react-redux": "^5.0.13",
     "@types/react-router": "^4.0.15",
     "@types/react-router-dom": "^4.0.8",
     "@types/react-router-redux": "^5.0.8",
@@ -121,10 +112,10 @@
   "scripts": {
     "build": "node scripts/build.js --production",
     "build-storybook": "build-storybook",
+    "debug": "node $NODE_DEBUG_OPTION scripts/start.js",
+    "deploy": "node scripts/deploy.js",
     "lint:js": "eslint ./src",
     "start": "node scripts/start.js",
-    "debug": "node $NODE_DEBUG_OPTION scripts/start.js",
-    "deploy": "node $NODE_DEBUG_OPTION scripts/deploy.js",
     "storybook": "start-storybook -p 6006",
     "test": "npm-run-all lint:* test:*",
     "test:jest": "NODE_ENV=test jest -u",
