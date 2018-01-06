@@ -97,6 +97,14 @@ export const WorkItem: React.SFC<Props> = props => {
         }}
         href={props.url}
         target="_blank"
+        innerRef={thumb => {
+          // FIXME: IE11以降でonAnimationEndが発火しないので暫定対応
+          if (thumb) {
+            setTimeout(() => {
+              thumb.style.opacity = "1"
+            }, 1500)
+          }
+        }}
       >
         <ThumbnailText>Launch Site</ThumbnailText>
         <img src={props.thumbnail}/>

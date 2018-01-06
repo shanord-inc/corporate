@@ -21,9 +21,9 @@ export default class ScrollPosition extends EventEmitter {
     if (!this.element) {
       return
     }
-    const wt = window.scrollY
+    const wt = window.pageYOffset
     const tt = this.element.offsetTop
-    const wh = window.scrollY + window.innerHeight
+    const wh = window.pageYOffset + window.innerHeight
     const th = this.element.offsetTop + this.element.clientHeight
     if (wh > tt && wt < th) {
       clearTimeout(this.timer)
